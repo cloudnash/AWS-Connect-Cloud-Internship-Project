@@ -1,0 +1,84 @@
+{
+  "_comment": "Amazon Lex Bot Configuration — defines what the AI chatbot understands",
+
+  "botName": "ConnectSupportBot",
+  "description": "AI chatbot for handling common customer queries before routing to an agent",
+  "locale": "en_IN",
+  "childDirected": false,
+
+  "intents": [
+    {
+      "name": "CheckAccountStatus",
+      "_comment": "Customer says: 'What is my account status?' or 'Check my account'",
+      "sampleUtterances": [
+        "What is my account status",
+        "Check my account",
+        "Is my account active",
+        "Account balance please",
+        "Tell me about my account"
+      ],
+      "slots": [
+        {
+          "name": "AccountNumber",
+          "slotType": "AMAZON.Number",
+          "prompt": "Sure! Could you please share your account number?"
+        }
+      ],
+      "fulfillmentActivity": {
+        "type": "CodeHook",
+        "_comment": "This calls a Lambda function to actually fetch the account info"
+      }
+    },
+    {
+      "name": "RaiseComplaint",
+      "_comment": "Customer says: 'I want to raise a complaint' or 'I have a problem'",
+      "sampleUtterances": [
+        "I want to raise a complaint",
+        "I have a problem",
+        "This is not working",
+        "I need help",
+        "File a complaint"
+      ],
+      "slots": [
+        {
+          "name": "ComplaintType",
+          "slotType": "ComplaintTypeValues",
+          "prompt": "What type of issue are you facing? Billing, Technical, or Other?"
+        }
+      ],
+      "fulfillmentActivity": {
+        "type": "ReturnIntent",
+        "_comment": "Returns to Amazon Connect contact flow to route to a specialist queue"
+      }
+    },
+    {
+      "name": "TransferToAgent",
+      "_comment": "Customer asks to speak to a human agent",
+      "sampleUtterances": [
+        "Talk to an agent",
+        "Speak to a human",
+        "Connect me to support",
+        "I want to talk to someone",
+        "Transfer me please"
+      ],
+      "fulfillmentActivity": {
+        "type": "ReturnIntent"
+      }
+    },
+    {
+      "name": "FallbackIntent",
+      "_comment": "Triggered when the bot doesn't understand the customer",
+      "fulfillmentActivity": {
+        "type": "ReturnIntent",
+        "response": "I'm sorry, I didn't understand that. Let me connect you to an agent."
+      }
+    }
+  ],
+
+  "slotTypes": [
+    {
+      "name": "ComplaintTypeValues",
+      "values": ["Billing", "Technical", "Delivery", "Other"]
+    }
+  ]
+}
