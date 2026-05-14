@@ -139,7 +139,3 @@ python scripts/setup_connect.py
 This is an internship learning project. Feel free to fork, explore, and learn from it!
 
 ---
-
-## 📄 License
-
-MIT License — free to use for learning purposes.
