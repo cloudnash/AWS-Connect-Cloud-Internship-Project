@@ -139,3 +139,12 @@ python scripts/setup_connect.py
 This is an internship learning project. Feel free to fork, explore, and learn from it!
 
 ---
+
+*📞 Contact*
+---
+
+- GitHub: [@cloudnash](https://github.com/cloudnash)
+- LinkedIn: [Nashit Ahmad](https://in.linkedin.com/in/nashitahmad)
+- Email: nashitakerfeldt@gmail.com
+
+---
