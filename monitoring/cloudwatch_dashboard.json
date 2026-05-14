@@ -1,0 +1,65 @@
+{
+  "_comment": "Amazon CloudWatch Dashboard — monitors your Amazon Connect contact centre in real-time",
+
+  "DashboardName": "ConnectContactCentreDashboard",
+
+  "widgets": [
+    {
+      "type": "metric",
+      "title": "Calls in Queue (Real-Time)",
+      "_comment": "Shows how many customers are currently waiting in queue",
+      "properties": {
+        "metrics": [
+          ["AWS/Connect", "CallsInQueue", "InstanceId", "YOUR_CONNECT_INSTANCE_ID"]
+        ],
+        "period": 60,
+        "stat": "Maximum",
+        "view": "timeSeries",
+        "title": "Live Calls Waiting in Queue"
+      }
+    },
+    {
+      "type": "metric",
+      "title": "Average Handle Time (AHT)",
+      "_comment": "How long agents are spending on each call on average",
+      "properties": {
+        "metrics": [
+          ["AWS/Connect", "HandleTime", "InstanceId", "YOUR_CONNECT_INSTANCE_ID"]
+        ],
+        "period": 300,
+        "stat": "Average",
+        "view": "timeSeries",
+        "title": "Avg Handle Time (seconds)"
+      }
+    },
+    {
+      "type": "metric",
+      "title": "Missed / Abandoned Calls",
+      "_comment": "Customers who hung up before an agent picked up — important for SLA",
+      "properties": {
+        "metrics": [
+          ["AWS/Connect", "MissedCalls", "InstanceId", "YOUR_CONNECT_INSTANCE_ID"]
+        ],
+        "period": 300,
+        "stat": "Sum",
+        "view": "bar",
+        "title": "Missed Calls Count"
+      }
+    },
+    {
+      "type": "metric",
+      "title": "Lambda Errors",
+      "_comment": "Tracks if our Lambda functions are failing — critical for production health",
+      "properties": {
+        "metrics": [
+          ["AWS/Lambda", "Errors", "FunctionName", "CustomerLookup"],
+          ["AWS/Lambda", "Errors", "FunctionName", "CallLogger"]
+        ],
+        "period": 300,
+        "stat": "Sum",
+        "view": "timeSeries",
+        "title": "Lambda Function Errors"
+      }
+    }
+  ]
+}
